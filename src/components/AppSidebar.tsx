@@ -1,4 +1,4 @@
-import { Home, Library, Compass, MessageSquare, Settings } from "lucide-react";
+import { Home, Library, Compass, MessageSquare, Settings, LogOut } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -10,6 +10,8 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const menuItems = [
   {
@@ -42,6 +44,17 @@ const menuItems = [
 export function AppSidebar() {
   const navigate = useNavigate();
 
+  const handleLogout = async () => {
+    try {
+      await supabase.auth.signOut();
+      toast.success("Déconnexion réussie");
+      navigate("/login");
+    } catch (error) {
+      console.error("Erreur lors de la déconnexion:", error);
+      toast.error("Erreur lors de la déconnexion");
+    }
+  };
+
   return (
     <Sidebar>
       <SidebarContent>
@@ -57,6 +70,12 @@ export function AppSidebar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+              <SidebarMenuItem>
+                <SidebarMenuButton onClick={handleLogout}>
+                  <LogOut className="w-5 h-5" />
+                  <span>Déconnexion</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
