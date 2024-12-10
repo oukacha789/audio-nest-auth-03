@@ -1,8 +1,10 @@
 import RegisterForm from "@/components/auth/RegisterForm";
+import { BackButton } from "@/components/BackButton";
 
 const Register = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
+      <BackButton />
       <div className="w-full max-w-md space-y-8">
         <div className="text-center space-y-2">
           <h1 className="text-2xl font-bold">Créer un compte</h1>
