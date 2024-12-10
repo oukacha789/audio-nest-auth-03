@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import { supabase } from "@/integrations/supabase/client";
 import Index from "./pages/Index";
+import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Settings from "./pages/Settings";
 import Reviews from "./pages/Reviews";
@@ -22,7 +23,7 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/login" element={<Login />} />
-            <Route path="/" element={<Index />} />
+            <Route path="/" element={<Home />} />
             <Route path="/repertoire" element={<Index />} />
             <Route path="/explorer" element={<Explorer />} />
             <Route path="/avis" element={<Reviews />} />
