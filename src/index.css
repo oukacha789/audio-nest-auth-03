@@ -4,13 +4,13 @@
 
 @layer base {
   :root {
-    --background: 200 25% 20%; /* Gris-ciel claire légèrement plus clair */
+    --background: 200 25% 26%; /* Gris-ciel claire avec luminosité augmentée de 30% */
     --foreground: 210 40% 98%;
 
-    --card: 200 25% 22%; /* Légèrement plus clair que le fond principal */
+    --card: 200 25% 28%; /* Légèrement plus clair que le fond principal */
     --card-foreground: 210 40% 98%;
 
-    --popover: 200 25% 20%;
+    --popover: 200 25% 26%;
     --popover-foreground: 210 40% 98%;
 
     --primary: 222.2 47.4% 11.2%;
@@ -45,13 +45,13 @@
   }
 
   .dark {
-    --background: 200 25% 20%; /* Même teinte pour le mode sombre */
+    --background: 200 25% 26%; /* Même teinte avec luminosité augmentée pour le mode sombre */
     --foreground: 210 40% 98%;
 
-    --card: 200 25% 22%; /* Même teinte pour le mode sombre */
+    --card: 200 25% 28%; /* Même teinte avec luminosité augmentée pour le mode sombre */
     --card-foreground: 210 40% 98%;
 
-    --popover: 200 25% 20%;
+    --popover: 200 25% 26%;
     --popover-foreground: 210 40% 98%;
 
     --primary: 210 40% 98%;
