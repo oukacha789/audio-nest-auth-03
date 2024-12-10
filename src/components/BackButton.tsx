@@ -8,11 +8,11 @@ export function BackButton() {
   return (
     <Button
       variant="outline"
-      size="default"
+      size="sm"
       onClick={() => navigate(-1)}
-      className="fixed top-4 left-4 z-40 gap-2 bg-background/80 backdrop-blur-sm border"
+      className="fixed top-4 left-[280px] z-40 gap-1 bg-background/80 backdrop-blur-sm border scale-75"
     >
-      <ChevronLeft className="h-4 w-4" />
+      <ChevronLeft className="h-3 w-3" />
       Retour
     </Button>
   );
