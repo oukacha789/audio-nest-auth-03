@@ -6,6 +6,7 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { RecentTracks } from "@/components/RecentTracks";
 import { PopularTracks } from "@/components/PopularTracks";
+import { BackButton } from "@/components/BackButton";
 import { supabase } from "@/integrations/supabase/client";
 
 const Index = () => {
@@ -36,7 +37,8 @@ const Index = () => {
     <SidebarProvider>
       <div className="min-h-screen flex w-full bg-background">
         <AppSidebar />
-        <main className="flex-1 p-6">
+        <main className="flex-1 p-6 relative">
+          <BackButton />
           <div className="space-y-6">
             <h1 className="text-3xl font-bold">Music STUDIO</h1>
             
