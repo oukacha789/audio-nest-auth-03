@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import Settings from "./pages/Settings";
 import Reviews from "./pages/Reviews";
 import Explorer from "./pages/Explorer";
+import Register from "./pages/Register";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +24,7 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/" element={<Home />} />
             <Route path="/repertoire" element={<Index />} />
             <Route path="/explorer" element={<Explorer />} />
