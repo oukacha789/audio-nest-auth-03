@@ -7,12 +7,13 @@ export function BackButton() {
 
   return (
     <Button
-      variant="ghost"
-      size="icon"
+      variant="outline"
+      size="lg"
       onClick={() => navigate(-1)}
-      className="absolute top-4 left-4"
+      className="fixed top-4 left-4 z-50 gap-2 bg-background/80 backdrop-blur-sm border-2"
     >
-      <ChevronLeft className="h-6 w-6" />
+      <ChevronLeft className="h-5 w-5" />
+      Retour
     </Button>
   );
 }
