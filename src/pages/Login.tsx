@@ -51,8 +51,15 @@ const Login = () => {
                   colors: {
                     brand: 'rgb(var(--primary))',
                     brandAccent: 'rgb(var(--primary))',
+                    inputText: 'white',
+                    inputBackground: 'rgb(var(--background))',
+                    inputPlaceholder: 'rgb(var(--muted-foreground))',
                   },
                 },
+              },
+              className: {
+                input: 'text-white',
+                label: 'text-white',
               },
             }}
             providers={[]}
