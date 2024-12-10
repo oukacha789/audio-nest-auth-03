@@ -9,7 +9,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
@@ -43,6 +43,7 @@ const menuItems = [
 
 export function AppSidebar() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = async () => {
     try {
@@ -64,7 +65,10 @@ export function AppSidebar() {
             <SidebarMenu>
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton onClick={() => navigate(item.path)}>
+                  <SidebarMenuButton 
+                    onClick={() => navigate(item.path)}
+                    isActive={location.pathname === item.path}
+                  >
                     <item.icon className="w-5 h-5" />
                     <span>{item.title}</span>
                   </SidebarMenuButton>
