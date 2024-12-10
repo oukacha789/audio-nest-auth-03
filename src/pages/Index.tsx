@@ -40,7 +40,19 @@ const Index = () => {
         <main className="flex-1 p-6 relative">
           <BackButton />
           <div className="space-y-6">
-            <h1 className="text-3xl font-bold">Music STUDIO</h1>
+            <div className="relative h-[300px] w-full rounded-lg overflow-hidden mb-8">
+              <img
+                src="https://images.unsplash.com/photo-1470813740244-df37b8c1edcb"
+                alt="Music Studio Hero"
+                className="w-full h-full object-cover transition-transform hover:scale-105 duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent">
+                <div className="absolute bottom-0 left-0 p-8">
+                  <h1 className="text-4xl font-bold text-white mb-2">Music STUDIO</h1>
+                  <p className="text-white/80 text-lg">Votre espace musical personnalisé</p>
+                </div>
+              </div>
+            </div>
             
             <div className="grid md:grid-cols-2 gap-6">
               <Card>
