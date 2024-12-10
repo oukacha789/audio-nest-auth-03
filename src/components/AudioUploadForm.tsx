@@ -27,9 +27,18 @@ export default function AudioUploadForm() {
   const session = useSession();
   const { toast } = useToast();
   const [isUploading, setIsUploading] = useState(false);
-  const form = useForm<FormData>();
+  
+  const form = useForm<FormData>({
+    defaultValues: {
+      title: "",
+      artist: "",
+      description: "",
+    },
+  });
 
   const onSubmit = async (data: FormData) => {
+    console.log("Form data:", data); // Debug log
+
     if (!session?.user) {
       toast({
         title: "Erreur",
@@ -39,7 +48,7 @@ export default function AudioUploadForm() {
       return;
     }
 
-    const file = data.audioFile[0];
+    const file = data.audioFile?.[0];
     if (!file) {
       toast({
         title: "Erreur",
@@ -104,6 +113,7 @@ export default function AudioUploadForm() {
         <FormField
           control={form.control}
           name="title"
+          rules={{ required: "Le titre est requis" }}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Titre</FormLabel>
@@ -118,6 +128,7 @@ export default function AudioUploadForm() {
         <FormField
           control={form.control}
           name="artist"
+          rules={{ required: "L'artiste est requis" }}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Artiste</FormLabel>
@@ -150,6 +161,7 @@ export default function AudioUploadForm() {
         <FormField
           control={form.control}
           name="audioFile"
+          rules={{ required: "Le fichier audio est requis" }}
           render={({ field: { onChange, value, ...field } }) => (
             <FormItem>
               <FormLabel>Fichier Audio</FormLabel>
@@ -158,8 +170,9 @@ export default function AudioUploadForm() {
                   type="file"
                   accept="audio/*"
                   onChange={(e) => {
-                    if (e.target.files) {
-                      onChange(e.target.files);
+                    const files = e.target.files;
+                    if (files?.length) {
+                      onChange(files);
                     }
                   }}
                   {...field}
