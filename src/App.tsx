@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Settings from "./pages/Settings";
 import Reviews from "./pages/Reviews";
+import Explorer from "./pages/Explorer";
 
 const queryClient = new QueryClient();
 
@@ -23,7 +24,7 @@ const App = () => (
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<Index />} />
             <Route path="/repertoire" element={<Index />} />
-            <Route path="/explorer" element={<Index />} />
+            <Route path="/explorer" element={<Explorer />} />
             <Route path="/avis" element={<Reviews />} />
             <Route path="/parametres" element={<Settings />} />
           </Routes>
