@@ -16,7 +16,19 @@ export default function Home() {
         <main className="flex-1 overflow-y-auto p-8 relative">
           <BackButton />
           <div className="max-w-4xl mx-auto space-y-8">
-            <h1 className="text-3xl font-bold">Bienvenue sur votre espace musical</h1>
+            {/* Hero Image Section */}
+            <div className="relative h-64 md:h-96 rounded-lg overflow-hidden mb-8">
+              <img
+                src="https://images.unsplash.com/photo-1511379938547-c1f69419868d"
+                alt="Music Studio"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                <h1 className="text-4xl font-bold mb-2">Bienvenue sur votre espace musical</h1>
+                <p className="text-lg text-white/80">Explorez, créez et partagez votre musique</p>
+              </div>
+            </div>
             
             {session ? (
               <div className="grid gap-6">
