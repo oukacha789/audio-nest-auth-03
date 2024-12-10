@@ -1,6 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormDescription } from "@/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Switch } from "@/components/ui/switch";
+import { Slider } from "@/components/ui/slider";
+import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -8,12 +11,22 @@ import * as z from "zod";
 
 const formSchema = z.object({
   theme: z.enum(["default", "classic"]),
+  notifications: z.boolean().default(true),
+  username: z.string().min(2).max(50),
+  volume: z.number().min(0).max(100),
+  autoplay: z.boolean().default(false),
+  quality: z.enum(["auto", "high", "medium", "low"]),
 });
 
 type SettingsFormValues = z.infer<typeof formSchema>;
 
 const defaultValues: Partial<SettingsFormValues> = {
   theme: "default",
+  notifications: true,
+  username: "",
+  volume: 80,
+  autoplay: false,
+  quality: "auto",
 };
 
 export default function Settings() {
@@ -47,6 +60,9 @@ export default function Settings() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Thème visuel</FormLabel>
+                <FormDescription>
+                  Choisissez l'apparence générale de l'application
+                </FormDescription>
                 <FormControl>
                   <RadioGroup
                     onValueChange={field.onChange}
@@ -66,6 +82,132 @@ export default function Settings() {
                       </label>
                     </div>
                   </RadioGroup>
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="username"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Nom d'utilisateur</FormLabel>
+                <FormDescription>
+                  Ce nom sera affiché sur votre profil
+                </FormDescription>
+                <FormControl>
+                  <Input placeholder="Votre nom d'utilisateur" {...field} />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="volume"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Volume par défaut</FormLabel>
+                <FormDescription>
+                  Réglez le volume de lecture par défaut
+                </FormDescription>
+                <FormControl>
+                  <Slider
+                    min={0}
+                    max={100}
+                    step={1}
+                    defaultValue={[field.value]}
+                    onValueChange={(vals) => field.onChange(vals[0])}
+                    className="w-full"
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="quality"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Qualité audio</FormLabel>
+                <FormDescription>
+                  Définissez la qualité de lecture par défaut
+                </FormDescription>
+                <FormControl>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    className="grid grid-cols-4 gap-4"
+                  >
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="auto" id="auto" />
+                      <label htmlFor="auto" className="text-sm font-medium leading-none">
+                        Auto
+                      </label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="high" id="high" />
+                      <label htmlFor="high" className="text-sm font-medium leading-none">
+                        Haute
+                      </label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="medium" id="medium" />
+                      <label htmlFor="medium" className="text-sm font-medium leading-none">
+                        Moyenne
+                      </label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="low" id="low" />
+                      <label htmlFor="low" className="text-sm font-medium leading-none">
+                        Basse
+                      </label>
+                    </div>
+                  </RadioGroup>
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="notifications"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                <div className="space-y-0.5">
+                  <FormLabel className="text-base">Notifications</FormLabel>
+                  <FormDescription>
+                    Recevoir des notifications sur les nouveautés
+                  </FormDescription>
+                </div>
+                <FormControl>
+                  <Switch
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="autoplay"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                <div className="space-y-0.5">
+                  <FormLabel className="text-base">Lecture automatique</FormLabel>
+                  <FormDescription>
+                    Lancer automatiquement la lecture des morceaux
+                  </FormDescription>
+                </div>
+                <FormControl>
+                  <Switch
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
                 </FormControl>
               </FormItem>
             )}
