@@ -51,33 +51,52 @@ const RegisterForm = () => {
 
     try {
       setLoading(true);
+      console.log("Tentative d'inscription avec l'email:", formData.email);
       
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
       });
 
-      if (authError) throw authError;
+      if (authError) {
+        console.error("Erreur d'authentification:", authError);
+        
+        // Gestion spécifique de l'erreur "User already registered"
+        if (authError.message.includes("User already registered")) {
+          toast.error("Cette adresse email est déjà utilisée. Veuillez vous connecter ou utiliser une autre adresse.");
+          return;
+        }
+        
+        throw authError;
+      }
 
       if (authData.user) {
+        console.log("Utilisateur créé avec succès:", authData.user.id);
+        
         let avatarUrl = "";
         if (avatar) {
           const fileExt = avatar.name.split('.').pop();
           const fileName = `${authData.user.id}.${fileExt}`;
           
+          console.log("Upload de l'avatar...");
           const { error: uploadError } = await supabase.storage
             .from('avatars')
             .upload(fileName, avatar);
 
-          if (uploadError) throw uploadError;
+          if (uploadError) {
+            console.error("Erreur lors de l'upload de l'avatar:", uploadError);
+            throw uploadError;
+          }
 
           const { data: { publicUrl } } = supabase.storage
             .from('avatars')
             .getPublicUrl(fileName);
           
           avatarUrl = publicUrl;
+          console.log("Avatar uploadé avec succès:", avatarUrl);
         }
 
+        console.log("Mise à jour du profil...");
         const { error: updateError } = await supabase
           .from('profiles')
           .update({
@@ -87,7 +106,10 @@ const RegisterForm = () => {
           })
           .eq('id', authData.user.id);
 
-        if (updateError) throw updateError;
+        if (updateError) {
+          console.error("Erreur lors de la mise à jour du profil:", updateError);
+          throw updateError;
+        }
 
         toast.success("Inscription réussie !");
         navigate("/");
