@@ -3,6 +3,7 @@ import AudioUploadForm from "@/components/AudioUploadForm";
 import AudioList from "@/components/AudioList";
 import { AppSidebar } from "@/components/AppSidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
+import { BackButton } from "@/components/BackButton";
 
 export default function Index() {
   const session = useSession();
@@ -11,7 +12,8 @@ export default function Index() {
     <SidebarProvider>
       <div className="flex h-screen bg-background">
         <AppSidebar />
-        <main className="flex-1 overflow-y-auto p-8">
+        <main className="flex-1 overflow-y-auto p-8 relative">
+          <BackButton />
           <div className="max-w-4xl mx-auto space-y-8">
             <h1 className="text-3xl font-bold">Mon Répertoire</h1>
             
