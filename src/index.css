@@ -82,9 +82,7 @@
     --sidebar-border: 350 25% 15%;
     --sidebar-ring: 350 30% 30%;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
