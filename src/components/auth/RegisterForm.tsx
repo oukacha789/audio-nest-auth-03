@@ -53,9 +53,32 @@ const RegisterForm = () => {
       setLoading(true);
       console.log("Tentative d'inscription avec l'email:", formData.email);
       
+      // First, check if user exists in the profiles table
+      const { data: existingUser, error: checkError } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('username', formData.username)
+        .single();
+
+      if (checkError && checkError.code !== 'PGRST116') {
+        console.error("Erreur lors de la vérification de l'utilisateur:", checkError);
+        toast.error("Une erreur est survenue lors de la vérification de l'utilisateur");
+        return;
+      }
+
+      if (existingUser) {
+        toast.error("Ce nom d'utilisateur est déjà utilisé");
+        return;
+      }
+      
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
+        options: {
+          data: {
+            username: formData.username
+          }
+        }
       });
 
       if (authError) {
