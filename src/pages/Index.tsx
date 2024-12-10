@@ -1,7 +1,7 @@
 import { useSession } from "@supabase/auth-helpers-react";
 import AudioUploadForm from "@/components/AudioUploadForm";
 import AudioList from "@/components/AudioList";
-import AppSidebar from "@/components/AppSidebar";
+import { AppSidebar } from "@/components/AppSidebar";
 
 export default function Index() {
   const session = useSession();

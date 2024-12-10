@@ -150,14 +150,18 @@ export default function AudioUploadForm() {
         <FormField
           control={form.control}
           name="audioFile"
-          render={({ field: { onChange, ...field } }) => (
+          render={({ field: { onChange, value, ...field } }) => (
             <FormItem>
               <FormLabel>Fichier Audio</FormLabel>
               <FormControl>
                 <Input
                   type="file"
                   accept="audio/*"
-                  onChange={(e) => onChange(e.target.files)}
+                  onChange={(e) => {
+                    if (e.target.files) {
+                      onChange(e.target.files);
+                    }
+                  }}
                   {...field}
                 />
               </FormControl>
