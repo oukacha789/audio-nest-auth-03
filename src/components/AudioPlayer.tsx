@@ -26,12 +26,28 @@ export default function AudioPlayer({ id, title, artist, filePath, onDelete }: A
 
   useEffect(() => {
     const fetchAudioUrl = async () => {
-      const { data } = await supabase.storage
-        .from("audio")
-        .createSignedUrl(filePath, 3600);
+      if (!filePath) {
+        console.error("No file path provided");
+        return;
+      }
 
-      if (data?.signedUrl) {
-        setAudioUrl(data.signedUrl);
+      try {
+        const { data, error } = await supabase.storage
+          .from("audio")
+          .createSignedUrl(filePath, 3600);
+
+        if (error) {
+          console.error("Error fetching audio URL:", error);
+          throw error;
+        }
+
+        if (data?.signedUrl) {
+          console.log("Audio URL fetched successfully:", data.signedUrl);
+          setAudioUrl(data.signedUrl);
+        }
+      } catch (error) {
+        console.error("Failed to fetch audio URL:", error);
+        toast.error("Erreur lors du chargement de l'audio");
       }
     };
 
@@ -96,6 +112,10 @@ export default function AudioPlayer({ id, title, artist, filePath, onDelete }: A
 
   const handleDelete = async () => {
     try {
+      if (!filePath) {
+        throw new Error("No file path provided");
+      }
+
       const { error: storageError } = await supabase.storage
         .from("audio")
         .remove([filePath]);

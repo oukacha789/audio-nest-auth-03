@@ -51,9 +51,11 @@ export default function AudioList() {
       {tracks.map((track) => (
         <AudioPlayer
           key={track.id}
-          track={track}
-          onUpdate={fetchTracks}
-          canEdit={session?.user?.id === track.user_id}
+          id={track.id}
+          title={track.title}
+          artist={track.artist}
+          filePath={track.file_path}
+          onDelete={fetchTracks}
         />
       ))}
     </div>
