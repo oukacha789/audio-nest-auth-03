@@ -1,10 +1,10 @@
 import { useState, useRef, useEffect } from "react";
-import { Play, Pause, Volume2, VolumeX, Trash2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Slider } from "@/components/ui/slider";
-import { supabase } from "@/integrations/supabase/client";
 import { useSession } from "@supabase/auth-helpers-react";
+import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { AudioControls } from "./audio/AudioControls";
+import { VolumeControls } from "./audio/VolumeControls";
+import { TrackInfo } from "./audio/TrackInfo";
 
 interface AudioPlayerProps {
   id: string;
@@ -96,14 +96,12 @@ export default function AudioPlayer({ id, title, artist, filePath, onDelete }: A
 
   const handleDelete = async () => {
     try {
-      // Supprimer le fichier du stockage
       const { error: storageError } = await supabase.storage
         .from("audio")
         .remove([filePath]);
 
       if (storageError) throw storageError;
 
-      // Supprimer l'enregistrement de la base de données
       const { error: dbError } = await supabase
         .from("audio_tracks")
         .delete()
@@ -123,78 +121,29 @@ export default function AudioPlayer({ id, title, artist, filePath, onDelete }: A
     <div className="w-full max-w-2xl bg-background border rounded-lg p-4 space-y-4">
       <audio ref={audioRef} src={audioUrl} />
       
-      <div className="flex justify-between items-start">
-        <div className="space-y-1">
-          <h3 className="font-semibold">{title}</h3>
-          <p className="text-sm text-muted-foreground">{artist}</p>
-        </div>
-        
-        {session?.user?.id && (
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={handleDelete}
-            className="h-8 w-8 text-destructive hover:text-destructive"
-          >
-            <Trash2 className="h-4 w-4" />
-          </Button>
-        )}
-      </div>
+      <TrackInfo
+        title={title}
+        artist={artist}
+        showDeleteButton={!!session?.user?.id}
+        onDelete={handleDelete}
+      />
 
       <div className="space-y-2">
-        <div className="flex items-center gap-2">
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={togglePlay}
-            className="h-8 w-8"
-          >
-            {isPlaying ? (
-              <Pause className="h-4 w-4" />
-            ) : (
-              <Play className="h-4 w-4" />
-            )}
-          </Button>
+        <AudioControls
+          isPlaying={isPlaying}
+          currentTime={currentTime}
+          duration={duration}
+          onPlayPause={togglePlay}
+          onTimeChange={handleTimeChange}
+          formatTime={formatTime}
+        />
 
-          <div className="flex-1">
-            <Slider
-              value={[currentTime]}
-              min={0}
-              max={duration || 100}
-              step={1}
-              onValueChange={handleTimeChange}
-              className="w-full"
-            />
-          </div>
-
-          <span className="text-sm min-w-[4rem] text-right">
-            {formatTime(currentTime)} / {formatTime(duration)}
-          </span>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={toggleMute}
-            className="h-8 w-8"
-          >
-            {isMuted ? (
-              <VolumeX className="h-4 w-4" />
-            ) : (
-              <Volume2 className="h-4 w-4" />
-            )}
-          </Button>
-
-          <Slider
-            value={[volume]}
-            min={0}
-            max={1}
-            step={0.1}
-            onValueChange={handleVolumeChange}
-            className="w-24"
-          />
-        </div>
+        <VolumeControls
+          isMuted={isMuted}
+          volume={volume}
+          onMuteToggle={toggleMute}
+          onVolumeChange={handleVolumeChange}
+        />
       </div>
     </div>
   );
