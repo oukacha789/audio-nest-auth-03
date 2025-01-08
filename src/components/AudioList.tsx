@@ -1,47 +1,59 @@
 import { useEffect, useState } from "react";
 import { useSession } from "@supabase/auth-helpers-react";
-import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import AudioPlayer from "./AudioPlayer";
 
-interface AudioTrack {
+type AudioTrack = {
   id: string;
   title: string;
   artist: string;
+  description: string;
   file_path: string;
-}
+  user_id: string;
+};
 
 export default function AudioList() {
   const session = useSession();
+  const [tracks, setTracks] = useState<AudioTrack[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const { data: tracks, isLoading, refetch } = useQuery({
-    queryKey: ["audioTracks", session?.user?.id],
-    queryFn: async () => {
+  const fetchTracks = async () => {
+    try {
+      setIsLoading(true);
       const { data, error } = await supabase
         .from("audio_tracks")
         .select("*")
         .order("created_at", { ascending: false });
 
       if (error) throw error;
-      return data as AudioTrack[];
-    },
-    enabled: !!session?.user,
-  });
+      setTracks(data || []);
+    } catch (error) {
+      console.error("Error fetching tracks:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchTracks();
+  }, []);
 
   if (isLoading) {
-    return <div>Chargement des pistes audio...</div>;
+    return <div>Chargement des pistes...</div>;
+  }
+
+  if (tracks.length === 0) {
+    return <div>Aucune piste audio trouvée.</div>;
   }
 
   return (
-    <div className="space-y-4">
-      {tracks?.map((track) => (
+    <div className="space-y-6">
+      {tracks.map((track) => (
         <AudioPlayer
           key={track.id}
-          id={track.id}
-          title={track.title}
-          artist={track.artist}
-          filePath={track.file_path}
-          onDelete={refetch}
+          track={track}
+          onUpdate={fetchTracks}
+          canEdit={session?.user?.id === track.user_id}
         />
       ))}
     </div>
