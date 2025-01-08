@@ -14,7 +14,7 @@ interface AudioTrack {
 export default function AudioList() {
   const session = useSession();
 
-  const { data: tracks, isLoading } = useQuery({
+  const { data: tracks, isLoading, refetch } = useQuery({
     queryKey: ["audioTracks", session?.user?.id],
     queryFn: async () => {
       const { data, error } = await supabase
@@ -37,9 +37,11 @@ export default function AudioList() {
       {tracks?.map((track) => (
         <AudioPlayer
           key={track.id}
+          id={track.id}
           title={track.title}
           artist={track.artist}
           filePath={track.file_path}
+          onDelete={refetch}
         />
       ))}
     </div>
