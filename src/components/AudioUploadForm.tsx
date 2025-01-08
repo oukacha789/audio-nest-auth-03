@@ -169,7 +169,7 @@ export default function AudioUploadForm({ track, onUpdate }: { track?: AudioTrac
             <FormItem>
               <FormLabel>Titre</FormLabel>
               <FormControl>
-                <Input placeholder="Titre de la piste" {...field} />
+                <Input {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -184,7 +184,7 @@ export default function AudioUploadForm({ track, onUpdate }: { track?: AudioTrac
             <FormItem>
               <FormLabel>Artiste</FormLabel>
               <FormControl>
-                <Input placeholder="Nom de l'artiste" {...field} />
+                <Input {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -199,7 +199,6 @@ export default function AudioUploadForm({ track, onUpdate }: { track?: AudioTrac
               <FormLabel>Description</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Description de la piste"
                   className="resize-none"
                   {...field}
                 />
