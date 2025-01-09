@@ -4,6 +4,7 @@ import AudioList from "@/components/AudioList";
 import { AppSidebar } from "@/components/AppSidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { BackButton } from "@/components/BackButton";
+import { BackgroundImage } from "@/components/BackgroundImage";
 
 export default function Index() {
   const session = useSession();
@@ -11,6 +12,7 @@ export default function Index() {
   return (
     <SidebarProvider>
       <div className="flex h-screen bg-background">
+        <BackgroundImage />
         <AppSidebar />
         <main className="flex-1 overflow-y-auto p-8 relative">
           <BackButton />

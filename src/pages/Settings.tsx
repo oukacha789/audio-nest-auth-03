@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { BackButton } from "@/components/BackButton";
+import { BackgroundImage } from "@/components/BackgroundImage";
 
 const formSchema = z.object({
   theme: z.enum(["default", "classic"]),
@@ -46,6 +47,7 @@ export default function Settings() {
 
   return (
     <div className="container max-w-2xl py-10 relative">
+      <BackgroundImage />
       <BackButton />
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Paramètres</h1>

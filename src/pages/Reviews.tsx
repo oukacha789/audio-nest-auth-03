@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { BackButton } from "@/components/BackButton";
+import { BackgroundImage } from "@/components/BackgroundImage";
 import {
   Form,
   FormControl,
@@ -70,6 +71,7 @@ export default function Reviews() {
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full bg-background">
+        <BackgroundImage />
         <AppSidebar />
         <main className="flex-1 p-6 relative">
           <BackButton />

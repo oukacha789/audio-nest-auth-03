@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useSession } from "@supabase/auth-helpers-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { BackgroundImage } from "@/components/BackgroundImage";
 
 const Explorer = () => {
   const session = useSession();
@@ -44,6 +45,7 @@ const Explorer = () => {
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full bg-background">
+        <BackgroundImage />
         <AppSidebar />
         <main className="flex-1 p-6 relative">
           <BackButton />
