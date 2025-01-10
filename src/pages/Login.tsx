@@ -131,7 +131,7 @@ const Login = () => {
                 },
               },
             }}
-            view={showPassword ? "sign_in_password_visible" : "sign_in"}
+            view={showPassword ? "sign_up" : "sign_in"}
           />
         </div>
       </div>
