@@ -36,25 +36,25 @@ export default function Home() {
                   <h2 className="text-2xl font-semibold">Que souhaitez-vous faire ?</h2>
                   <div className="grid gap-4 md:grid-cols-2">
                     <Button 
-                      className="h-32 text-lg"
+                      className="h-24 text-base px-4 py-2"
                       onClick={() => navigate('/repertoire')}
                     >
                       Gérer mon répertoire musical
                     </Button>
                     <Button 
-                      className="h-32 text-lg"
+                      className="h-24 text-base px-4 py-2"
                       onClick={() => navigate('/explorer')}
                     >
                       Explorer de nouvelles musiques
                     </Button>
                     <Button 
-                      className="h-32 text-lg"
+                      className="h-24 text-base px-4 py-2"
                       onClick={() => navigate('/avis')}
                     >
                       Voir les avis et commentaires
                     </Button>
                     <Button 
-                      className="h-32 text-lg"
+                      className="h-24 text-base px-4 py-2"
                       onClick={() => navigate('/parametres')}
                     >
                       Gérer mes paramètres
