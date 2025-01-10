@@ -6,10 +6,13 @@ import { useNavigate } from "react-router-dom";
 import { BackButton } from "@/components/BackButton";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AuthError } from "@supabase/supabase-js";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 
 const Login = () => {
   const navigate = useNavigate();
   const [error, setError] = useState<string>("");
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     // Redirect to home if user is already logged in
@@ -70,6 +73,23 @@ const Login = () => {
         )}
 
         <div className="bg-card p-6 rounded-lg shadow-sm">
+          <div className="mb-4 flex items-center space-x-2">
+            <RadioGroup
+              defaultValue="hide"
+              onValueChange={(value) => setShowPassword(value === "show")}
+              className="flex items-center space-x-2"
+            >
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="hide" id="hide" />
+                <Label htmlFor="hide">Masquer</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="show" id="show" />
+                <Label htmlFor="show">Afficher</Label>
+              </div>
+            </RadioGroup>
+          </div>
+
           <Auth
             supabaseClient={supabase}
             appearance={{
@@ -111,6 +131,7 @@ const Login = () => {
                 },
               },
             }}
+            view={showPassword ? "sign_in_password_visible" : "sign_in"}
           />
         </div>
       </div>
