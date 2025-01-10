@@ -29,8 +29,8 @@ const Login = () => {
         if (session) {
           navigate("/");
         }
-        if (event === 'USER_DELETED') {
-          setError("Le compte utilisateur a été supprimé.");
+        if (event === 'SIGNED_OUT') {
+          setError("Vous avez été déconnecté après 1 heure d'inactivité.");
         }
       }
     );
