@@ -92,7 +92,14 @@ const Explorer = () => {
               {/* Avis */}
               <Card>
                 <CardHeader>
-                  <CardTitle>Avis Sauvegardés</CardTitle>
+                  <CardTitle>
+                    <Link 
+                      to="/avis" 
+                      className="hover:text-primary transition-colors duration-200"
+                    >
+                      Avis Sauvegardés
+                    </Link>
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   {loadingReviews ? (
