@@ -5,11 +5,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { BackButton } from "@/components/BackButton";
-import { BackgroundImage } from "@/components/BackgroundImage";
 import { ThemeSettings } from "@/components/settings/ThemeSettings";
 import { UserSettings } from "@/components/settings/UserSettings";
 import { AudioSettings } from "@/components/settings/AudioSettings";
 import { NotificationSettings } from "@/components/settings/NotificationSettings";
+import { useLocation } from "react-router-dom";
 
 const formSchema = z.object({
   theme: z.enum(["default", "classic"]),
@@ -36,6 +36,16 @@ export default function Settings() {
     resolver: zodResolver(formSchema),
     defaultValues,
   });
+  const location = useLocation();
+
+  const getHeaderImage = () => {
+    switch (location.pathname) {
+      case '/parametres':
+        return "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=2070";
+      default:
+        return "https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=2070";
+    }
+  };
 
   function onSubmit(data: SettingsFormValues) {
     console.log("Settings updated:", data);
@@ -46,27 +56,29 @@ export default function Settings() {
   }
 
   return (
-    <div className="relative min-h-screen">
-      <BackgroundImage />
-      <div className="container max-w-2xl py-10 relative z-10">
-        <BackButton />
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">Paramètres</h1>
-          <p className="text-muted-foreground">
-            Personnalisez l'apparence et le comportement de votre application.
-          </p>
-        </div>
-
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <ThemeSettings form={form} />
-            <UserSettings form={form} />
-            <AudioSettings form={form} />
-            <NotificationSettings form={form} />
-            <Button type="submit">Enregistrer les modifications</Button>
-          </form>
-        </Form>
+    <div className="container max-w-2xl py-10">
+      <BackButton />
+      <img 
+        src={getHeaderImage()} 
+        alt="Paramètres header" 
+        className="w-full h-48 object-cover rounded-lg mb-8"
+      />
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold mb-2">Paramètres</h1>
+        <p className="text-muted-foreground">
+          Personnalisez l'apparence et le comportement de votre application.
+        </p>
       </div>
+
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <ThemeSettings form={form} />
+          <UserSettings form={form} />
+          <AudioSettings form={form} />
+          <NotificationSettings form={form} />
+          <Button type="submit">Enregistrer les modifications</Button>
+        </form>
+      </Form>
     </div>
   );
 }
