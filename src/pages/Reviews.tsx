@@ -5,7 +5,6 @@ import { toast } from "sonner";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { BackButton } from "@/components/BackButton";
-import { BackgroundImage } from "@/components/BackgroundImage";
 import {
   Form,
   FormControl,
@@ -19,6 +18,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
+import { useLocation } from "react-router-dom";
 
 const formSchema = z.object({
   title: z.string().min(2, {
@@ -44,6 +44,17 @@ export default function Reviews() {
       comment: "",
     },
   });
+
+  const location = useLocation();
+
+  const getHeaderImage = () => {
+    switch (location.pathname) {
+      case '/avis':
+        return "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=2070";
+      default:
+        return "https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=2070";
+    }
+  };
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
@@ -71,11 +82,15 @@ export default function Reviews() {
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full bg-background">
-        <BackgroundImage />
         <AppSidebar />
         <main className="flex-1 p-6 relative">
           <BackButton />
           <div className="max-w-2xl mx-auto space-y-6">
+            <img 
+              src={getHeaderImage()} 
+              alt="Avis header" 
+              className="w-full h-48 object-cover rounded-lg mb-8"
+            />
             <div className="space-y-2">
               <h1 className="text-3xl font-bold">Avis & Commentaires</h1>
               <p className="text-muted-foreground">
