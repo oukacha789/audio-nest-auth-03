@@ -3,14 +3,11 @@ import { AppSidebar } from "@/components/AppSidebar";
 import { BackButton } from "@/components/BackButton";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { useSession } from "@supabase/auth-helpers-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BackgroundImage } from "@/components/BackgroundImage";
-import { Link } from "react-router-dom";
+import { AudioTracksCard } from "@/components/explorer/AudioTracksCard";
+import { ReviewsCard } from "@/components/explorer/ReviewsCard";
 
 const Explorer = () => {
-  const session = useSession();
-
   const { data: audioTracks, isLoading: loadingTracks } = useQuery({
     queryKey: ["audioTracks"],
     queryFn: async () => {
@@ -54,76 +51,8 @@ const Explorer = () => {
             <h1 className="text-3xl font-bold">Explorer</h1>
             
             <div className="grid gap-6 md:grid-cols-2">
-              {/* Pistes Audio */}
-              <Card>
-                <CardHeader>
-                  <CardTitle>
-                    <Link 
-                      to="/repertoire" 
-                      className="hover:text-primary transition-colors duration-200"
-                    >
-                      Pistes Audio Sauvegardées
-                    </Link>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  {loadingTracks ? (
-                    <p>Chargement des pistes...</p>
-                  ) : audioTracks?.length ? (
-                    <ul className="space-y-2">
-                      {audioTracks.map((track) => (
-                        <li key={track.id} className="p-2 border rounded">
-                          <p className="font-medium">{track.title}</p>
-                          <p className="text-sm text-muted-foreground">
-                            par {track.artist}
-                          </p>
-                          <p className="text-xs text-muted-foreground">
-                            Créé le: {new Date(track.created_at).toLocaleDateString()}
-                          </p>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p>Aucune piste audio trouvée</p>
-                  )}
-                </CardContent>
-              </Card>
-
-              {/* Avis */}
-              <Card>
-                <CardHeader>
-                  <CardTitle>
-                    <Link 
-                      to="/avis" 
-                      className="hover:text-primary transition-colors duration-200"
-                    >
-                      Avis Sauvegardés
-                    </Link>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  {loadingReviews ? (
-                    <p>Chargement des avis...</p>
-                  ) : reviews?.length ? (
-                    <ul className="space-y-2">
-                      {reviews.map((review) => (
-                        <li key={review.id} className="p-2 border rounded">
-                          <p className="font-medium">{review.title}</p>
-                          <p className="text-sm">Note: {review.rating}/5</p>
-                          <p className="text-sm text-muted-foreground">
-                            {review.comment}
-                          </p>
-                          <p className="text-xs text-muted-foreground">
-                            Créé le: {new Date(review.created_at).toLocaleDateString()}
-                          </p>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p>Aucun avis trouvé</p>
-                  )}
-                </CardContent>
-              </Card>
+              <AudioTracksCard audioTracks={audioTracks} isLoading={loadingTracks} />
+              <ReviewsCard reviews={reviews} isLoading={loadingReviews} />
             </div>
           </div>
         </main>
