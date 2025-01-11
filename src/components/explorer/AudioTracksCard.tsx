@@ -15,7 +15,11 @@ export const AudioTracksCard = ({ audioTracks, isLoading }: AudioTracksCardProps
     <Card>
       <CardHeader>
         <CardTitle>
-          <Button asChild variant="link" className="p-0 h-auto font-semibold text-xl">
+          <Button 
+            asChild 
+            variant="link" 
+            className="p-0 h-auto font-semibold text-xl text-white hover:text-[#F1F1F1] transition-colors"
+          >
             <Link to="/repertoire">
               Pistes Audio Sauvegardées
             </Link>
