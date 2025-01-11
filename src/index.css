@@ -28,8 +28,8 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 210 40% 45%; /* Modifié pour un gris plus clair */
+    --border: 210 40% 65%; /* Modifié pour une bordure plus claire */
+    --input: 210 40% 45%;
     --ring: 212.7 26.8% 83.9%;
 
     --radius: 0.5rem;
@@ -69,8 +69,8 @@
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 210 40% 45%; /* Modifié pour un gris plus clair */
+    --border: 210 40% 65%; /* Modifié pour une bordure plus claire */
+    --input: 210 40% 45%;
     --ring: 212.7 26.8% 83.9%;
 
     --sidebar-background: 350 30% 20%;
