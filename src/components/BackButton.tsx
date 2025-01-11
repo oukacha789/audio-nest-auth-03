@@ -10,7 +10,7 @@ export function BackButton() {
       variant="outline"
       size="sm"
       onClick={() => navigate(-1)}
-      className="fixed -top-6 left-[280px] z-40 gap-1 bg-background/80 backdrop-blur-sm border scale-75"
+      className="fixed -top-2 left-[280px] z-40 gap-1 bg-background/80 backdrop-blur-sm border scale-75"
     >
       <ChevronLeft className="h-3 w-3" />
       Retour
