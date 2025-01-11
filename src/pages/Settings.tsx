@@ -46,9 +46,9 @@ export default function Settings() {
   }
 
   return (
-    <>
+    <div className="relative min-h-screen">
       <BackgroundImage />
-      <div className="container max-w-2xl py-10 relative">
+      <div className="container max-w-2xl py-10 relative z-10">
         <BackButton />
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-2">Paramètres</h1>
@@ -57,7 +57,7 @@ export default function Settings() {
           </p>
         </div>
 
-      <Form {...form}>
+        <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
             control={form.control}
@@ -220,8 +220,8 @@ export default function Settings() {
 
           <Button type="submit">Enregistrer les modifications</Button>
         </form>
-      </Form>
+        </Form>
       </div>
-    </>
+    </div>
   );
 }
