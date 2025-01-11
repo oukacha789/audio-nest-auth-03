@@ -46,15 +46,16 @@ export default function Settings() {
   }
 
   return (
-    <div className="container max-w-2xl py-10 relative">
+    <>
       <BackgroundImage />
-      <BackButton />
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Paramètres</h1>
-        <p className="text-muted-foreground">
-          Personnalisez l'apparence et le comportement de votre application.
-        </p>
-      </div>
+      <div className="container max-w-2xl py-10 relative">
+        <BackButton />
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold mb-2">Paramètres</h1>
+          <p className="text-muted-foreground">
+            Personnalisez l'apparence et le comportement de votre application.
+          </p>
+        </div>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -220,6 +221,7 @@ export default function Settings() {
           <Button type="submit">Enregistrer les modifications</Button>
         </form>
       </Form>
-    </div>
+      </div>
+    </>
   );
 }
