@@ -53,7 +53,7 @@ const Explorer = () => {
               <img 
                 src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?q=80&w=150" 
                 alt="Vinyles"
-                className="w-32 h-32 rounded-full object-cover shadow-lg"
+                className="w-48 h-48 rounded-full object-cover shadow-lg"
               />
             </div>
             
