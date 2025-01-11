@@ -1,7 +1,8 @@
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { User, Mail, Lock } from "lucide-react";
 import type { FormData } from "./RegisterForm";
+import UsernameField from "./form-fields/UsernameField";
+import EmailField from "./form-fields/EmailField";
+import PasswordField from "./form-fields/PasswordField";
+import AvatarField from "./form-fields/AvatarField";
 
 interface RegisterFormFieldsProps {
   formData: FormData;
@@ -18,94 +19,34 @@ const RegisterFormFields = ({
 }: RegisterFormFieldsProps) => {
   return (
     <div className="space-y-4">
-      <div className="space-y-2">
-        <Label htmlFor="username">Nom d'utilisateur</Label>
-        <div className="relative">
-          <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-          <Input
-            id="username"
-            name="username"
-            type="text"
-            required
-            className="pl-10 bg-background"
-            placeholder="Votre nom d'utilisateur"
-            value={formData.username}
-            onChange={handleInputChange}
-          />
-        </div>
-      </div>
+      <UsernameField 
+        value={formData.username}
+        onChange={handleInputChange}
+      />
 
-      <div className="space-y-2">
-        <Label htmlFor="email">Email</Label>
-        <div className="relative">
-          <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-          <Input
-            id="email"
-            name="email"
-            type="email"
-            required
-            className="pl-10 bg-background"
-            placeholder="votre@email.com"
-            value={formData.email}
-            onChange={handleInputChange}
-          />
-        </div>
-      </div>
+      <EmailField 
+        value={formData.email}
+        onChange={handleInputChange}
+      />
 
-      <div className="space-y-2">
-        <Label htmlFor="password">Mot de passe</Label>
-        <div className="relative">
-          <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-          <Input
-            id="password"
-            name="password"
-            type="password"
-            required
-            className="pl-10 bg-background"
-            placeholder="Votre mot de passe"
-            value={formData.password}
-            onChange={handleInputChange}
-          />
-        </div>
-      </div>
+      <PasswordField
+        id="password"
+        label="Mot de passe"
+        value={formData.password}
+        onChange={handleInputChange}
+      />
 
-      <div className="space-y-2">
-        <Label htmlFor="confirmPassword">Confirmer le mot de passe</Label>
-        <div className="relative">
-          <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-          <Input
-            id="confirmPassword"
-            name="confirmPassword"
-            type="password"
-            required
-            className="pl-10 bg-background"
-            placeholder="Confirmez votre mot de passe"
-            value={formData.confirmPassword}
-            onChange={handleInputChange}
-          />
-        </div>
-      </div>
+      <PasswordField
+        id="confirmPassword"
+        label="Confirmer le mot de passe"
+        value={formData.confirmPassword}
+        onChange={handleInputChange}
+      />
 
-      <div className="space-y-2">
-        <Label htmlFor="avatar">Avatar (optionnel)</Label>
-        <Input
-          id="avatar"
-          name="avatar"
-          type="file"
-          accept="image/*"
-          className="bg-background"
-          onChange={handleAvatarChange}
-        />
-        {avatarPreview && (
-          <div className="mt-2">
-            <img
-              src={avatarPreview}
-              alt="Avatar preview"
-              className="w-20 h-20 rounded-full object-cover"
-            />
-          </div>
-        )}
-      </div>
+      <AvatarField
+        onChange={handleAvatarChange}
+        preview={avatarPreview}
+      />
     </div>
   );
 };
