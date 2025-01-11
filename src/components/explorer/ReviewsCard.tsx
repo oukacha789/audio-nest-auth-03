@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { Database } from "@/integrations/supabase/types";
+import { Button } from "@/components/ui/button";
 
 type Review = Database["public"]["Tables"]["reviews"]["Row"];
 
@@ -14,12 +15,15 @@ export const ReviewsCard = ({ reviews, isLoading }: ReviewsCardProps) => {
     <Card>
       <CardHeader>
         <CardTitle>
-          <Link 
-            to="/avis" 
-            className="hover:text-primary transition-colors duration-200"
+          <Button 
+            asChild 
+            variant="link" 
+            className="p-0 h-auto font-semibold text-xl text-white hover:text-[#F1F1F1] transition-colors"
           >
-            Avis Sauvegardés
-          </Link>
+            <Link to="/avis">
+              Avis Sauvegardés
+            </Link>
+          </Button>
         </CardTitle>
       </CardHeader>
       <CardContent>
