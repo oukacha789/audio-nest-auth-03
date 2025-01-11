@@ -27,7 +27,7 @@ const RegisterFormFields = ({
             name="username"
             type="text"
             required
-            className="pl-10 text-white"
+            className="pl-10 bg-background"
             placeholder="Votre nom d'utilisateur"
             value={formData.username}
             onChange={handleInputChange}
@@ -44,7 +44,7 @@ const RegisterFormFields = ({
             name="email"
             type="email"
             required
-            className="pl-10 text-white"
+            className="pl-10 bg-background"
             placeholder="votre@email.com"
             value={formData.email}
             onChange={handleInputChange}
@@ -61,7 +61,7 @@ const RegisterFormFields = ({
             name="password"
             type="password"
             required
-            className="pl-10 text-white"
+            className="pl-10 bg-background"
             placeholder="Votre mot de passe"
             value={formData.password}
             onChange={handleInputChange}
@@ -78,7 +78,7 @@ const RegisterFormFields = ({
             name="confirmPassword"
             type="password"
             required
-            className="pl-10 text-white"
+            className="pl-10 bg-background"
             placeholder="Confirmez votre mot de passe"
             value={formData.confirmPassword}
             onChange={handleInputChange}
@@ -93,7 +93,7 @@ const RegisterFormFields = ({
           name="avatar"
           type="file"
           accept="image/*"
-          className="text-white"
+          className="bg-background"
           onChange={handleAvatarChange}
         />
         {avatarPreview && (
