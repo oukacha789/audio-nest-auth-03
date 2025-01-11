@@ -6,6 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useSession } from "@supabase/auth-helpers-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BackgroundImage } from "@/components/BackgroundImage";
+import { Link } from "react-router-dom";
 
 const Explorer = () => {
   const session = useSession();
@@ -56,7 +57,14 @@ const Explorer = () => {
               {/* Pistes Audio */}
               <Card>
                 <CardHeader>
-                  <CardTitle>Pistes Audio Sauvegardées</CardTitle>
+                  <CardTitle>
+                    <Link 
+                      to="/repertoire" 
+                      className="hover:text-primary transition-colors duration-200"
+                    >
+                      Pistes Audio Sauvegardées
+                    </Link>
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   {loadingTracks ? (
