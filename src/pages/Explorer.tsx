@@ -48,7 +48,7 @@ const Explorer = () => {
         <main className="flex-1 p-6 relative">
           <BackButton />
           <div className="space-y-6">
-            <div className="flex items-center gap-4">
+            <div className="flex flex-col items-center justify-center gap-4">
               <h1 className="text-3xl font-bold">Explorer</h1>
               <img 
                 src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?q=80&w=150" 
