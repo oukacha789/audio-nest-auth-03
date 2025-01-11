@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { Database } from "@/integrations/supabase/types";
+import { Button } from "@/components/ui/button";
 
 type AudioTrack = Database["public"]["Tables"]["audio_tracks"]["Row"];
 
@@ -14,12 +15,11 @@ export const AudioTracksCard = ({ audioTracks, isLoading }: AudioTracksCardProps
     <Card>
       <CardHeader>
         <CardTitle>
-          <Link 
-            to="/repertoire" 
-            className="hover:text-primary transition-colors duration-200"
-          >
-            Pistes Audio Sauvegardées
-          </Link>
+          <Button asChild variant="link" className="p-0 h-auto font-semibold text-xl">
+            <Link to="/repertoire">
+              Pistes Audio Sauvegardées
+            </Link>
+          </Button>
         </CardTitle>
       </CardHeader>
       <CardContent>
