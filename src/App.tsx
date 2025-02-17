@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -33,6 +34,8 @@ const App = () => (
                 <Route path="/explorer" element={<Explorer />} />
                 <Route path="/avis" element={<Reviews />} />
                 <Route path="/parametres" element={<Settings />} />
+                {/* Route par défaut - redirige vers la page d'accueil */}
+                <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </div>
           </SidebarProvider>
