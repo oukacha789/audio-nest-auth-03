@@ -14,6 +14,11 @@ import Settings from "./pages/Settings";
 import Reviews from "./pages/Reviews";
 import Explorer from "./pages/Explorer";
 import Register from "./pages/Register";
+import Playlists from "./pages/Playlists";
+import Albums from "./pages/Albums";
+import Radio from "./pages/Radio";
+import Podcasts from "./pages/Podcasts";
+import { BackgroundImage } from "./components/BackgroundImage";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +31,7 @@ const App = () => (
         <BrowserRouter>
           <SidebarProvider>
             <div className="min-h-screen flex w-full">
+              <BackgroundImage />
               <Routes>
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
@@ -34,6 +40,10 @@ const App = () => (
                 <Route path="/explorer" element={<Explorer />} />
                 <Route path="/avis" element={<Reviews />} />
                 <Route path="/parametres" element={<Settings />} />
+                <Route path="/playlists" element={<Playlists />} />
+                <Route path="/albums" element={<Albums />} />
+                <Route path="/radio" element={<Radio />} />
+                <Route path="/podcasts" element={<Podcasts />} />
                 {/* Route par défaut - redirige vers la page d'accueil */}
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
