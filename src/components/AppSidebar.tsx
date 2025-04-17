@@ -17,7 +17,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useState } from "react";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 // Structure de données des menus
 const menuItems = [
@@ -78,7 +77,7 @@ const menuItems = [
 export function AppSidebar() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
+  const [openSubmenu, setOpenSubmenu] = useState<string | null>("Accueil");
 
   const handleLogout = async () => {
     try {
@@ -105,37 +104,36 @@ export function AppSidebar() {
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   {item.submenu ? (
-                    <Accordion type="single" collapsible className="w-full border-none">
-                      <AccordionItem value={item.title} className="border-none">
-                        <AccordionTrigger 
-                          className="p-0 hover:no-underline"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            navigate(item.path);
-                          }}
-                        >
-                          <SidebarMenuButton isActive={location.pathname === item.path}>
-                            <item.icon className="w-5 h-5" />
-                            <span>{item.title}</span>
-                          </SidebarMenuButton>
-                        </AccordionTrigger>
-                        <AccordionContent className="p-0 pb-0 pt-1">
-                          <SidebarMenuSub>
-                            {item.submenu.map((subItem) => (
-                              <SidebarMenuSubItem key={subItem.title}>
-                                <SidebarMenuSubButton
-                                  onClick={() => navigate(subItem.path)}
-                                  isActive={location.pathname === subItem.path}
-                                >
-                                  <subItem.icon className="w-4 h-4" />
-                                  <span>{subItem.title}</span>
-                                </SidebarMenuSubButton>
-                              </SidebarMenuSubItem>
-                            ))}
-                          </SidebarMenuSub>
-                        </AccordionContent>
-                      </AccordionItem>
-                    </Accordion>
+                    <>
+                      <SidebarMenuButton 
+                        onClick={() => toggleSubmenu(item.title)} 
+                        isActive={location.pathname === item.path}
+                      >
+                        <item.icon className="w-5 h-5" />
+                        <span>{item.title}</span>
+                        {openSubmenu === item.title ? (
+                          <ChevronUp className="ml-auto h-4 w-4" />
+                        ) : (
+                          <ChevronDown className="ml-auto h-4 w-4" />
+                        )}
+                      </SidebarMenuButton>
+                      
+                      {openSubmenu === item.title && (
+                        <SidebarMenuSub>
+                          {item.submenu.map((subItem) => (
+                            <SidebarMenuSubItem key={subItem.title}>
+                              <SidebarMenuSubButton
+                                onClick={() => navigate(subItem.path)}
+                                isActive={location.pathname === subItem.path}
+                              >
+                                <subItem.icon className="w-4 h-4" />
+                                <span>{subItem.title}</span>
+                              </SidebarMenuSubButton>
+                            </SidebarMenuSubItem>
+                          ))}
+                        </SidebarMenuSub>
+                      )}
+                    </>
                   ) : (
                     <SidebarMenuButton 
                       onClick={() => navigate(item.path)}
