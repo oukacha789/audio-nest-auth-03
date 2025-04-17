@@ -1,4 +1,5 @@
-import { Home, Library, Compass, MessageSquare, Settings, LogOut, UserPlus } from "lucide-react";
+
+import { Home, Library, Compass, MessageSquare, Settings, LogOut, UserPlus, Music, Image, Radio, Headphones, Mic } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -8,6 +9,9 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubItem,
+  SidebarMenuSubButton
 } from "@/components/ui/sidebar";
 import { useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -18,6 +22,28 @@ const menuItems = [
     title: "Accueil",
     icon: Home,
     path: "/",
+    submenu: [
+      {
+        title: "Playlists",
+        icon: Music,
+        path: "/playlists"
+      },
+      {
+        title: "Albums",
+        icon: Image,
+        path: "/albums"
+      },
+      {
+        title: "Radio",
+        icon: Radio,
+        path: "/radio"
+      },
+      {
+        title: "Podcasts",
+        icon: Mic,
+        path: "/podcasts"
+      }
+    ]
   },
   {
     title: "Mon Répertoire",
@@ -70,13 +96,38 @@ export function AppSidebar() {
             <SidebarMenu>
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton 
-                    onClick={() => navigate(item.path)}
-                    isActive={location.pathname === item.path}
-                  >
-                    <item.icon className="w-5 h-5" />
-                    <span>{item.title}</span>
-                  </SidebarMenuButton>
+                  {item.submenu ? (
+                    <>
+                      <SidebarMenuButton 
+                        onClick={() => navigate(item.path)}
+                        isActive={location.pathname === item.path}
+                      >
+                        <item.icon className="w-5 h-5" />
+                        <span>{item.title}</span>
+                      </SidebarMenuButton>
+                      <SidebarMenuSub>
+                        {item.submenu.map((subItem) => (
+                          <SidebarMenuSubItem key={subItem.title}>
+                            <SidebarMenuSubButton
+                              onClick={() => navigate(subItem.path)}
+                              isActive={location.pathname === subItem.path}
+                            >
+                              <subItem.icon className="w-4 h-4" />
+                              <span>{subItem.title}</span>
+                            </SidebarMenuSubButton>
+                          </SidebarMenuSubItem>
+                        ))}
+                      </SidebarMenuSub>
+                    </>
+                  ) : (
+                    <SidebarMenuButton 
+                      onClick={() => navigate(item.path)}
+                      isActive={location.pathname === item.path}
+                    >
+                      <item.icon className="w-5 h-5" />
+                      <span>{item.title}</span>
+                    </SidebarMenuButton>
+                  )}
                 </SidebarMenuItem>
               ))}
               <SidebarMenuItem>
