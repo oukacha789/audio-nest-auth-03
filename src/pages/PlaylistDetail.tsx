@@ -115,8 +115,8 @@ const PlaylistDetail = () => {
 
         if (tracksError) throw tracksError;
 
-        // Formater les données des pistes
-        const tracks = tracksData.map(item => ({
+        // Formater les données des pistes correctement
+        const tracks: Track[] = tracksData.map(item => ({
           id: item.audio_tracks.id,
           title: item.audio_tracks.title,
           artist: item.audio_tracks.artist,
