@@ -15,6 +15,7 @@ import Reviews from "./pages/Reviews";
 import Explorer from "./pages/Explorer";
 import Register from "./pages/Register";
 import Playlists from "./pages/Playlists";
+import PlaylistDetail from "./pages/PlaylistDetail";
 import Albums from "./pages/Albums";
 import Radio from "./pages/Radio";
 import Podcasts from "./pages/Podcasts";
@@ -41,6 +42,7 @@ const App = () => (
                 <Route path="/avis" element={<Reviews />} />
                 <Route path="/parametres" element={<Settings />} />
                 <Route path="/playlists" element={<Playlists />} />
+                <Route path="/playlists/:id" element={<PlaylistDetail />} />
                 <Route path="/albums" element={<Albums />} />
                 <Route path="/radio" element={<Radio />} />
                 <Route path="/podcasts" element={<Podcasts />} />
