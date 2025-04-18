@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { AppSidebar } from '@/components/AppSidebar';
 import { BackButton } from '@/components/BackButton';
@@ -103,6 +102,7 @@ const PlaylistDetail = () => {
           .select(`
             position,
             added_at,
+            track_id,
             audio_tracks (
               id,
               title,
