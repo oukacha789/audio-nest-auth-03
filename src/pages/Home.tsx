@@ -4,6 +4,42 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { BackButton } from "@/components/BackButton";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
+import { cn } from "@/lib/utils";
+import { Library, Music, Star, Users } from "lucide-react";
+
+const ListItem = React.forwardRef<
+  React.ElementRef<"a">,
+  React.ComponentProps<"a">
+>(({ className, title, children, ...props }, ref) => {
+  return (
+    <li>
+      <NavigationMenuLink asChild>
+        <a
+          ref={ref}
+          className={cn(
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            className
+          )}
+          {...props}
+        >
+          <div className="text-sm font-medium leading-none">{title}</div>
+          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+            {children}
+          </p>
+        </a>
+      </NavigationMenuLink>
+    </li>
+  );
+});
+ListItem.displayName = "ListItem";
 
 export default function Home() {
   const session = useSession();
@@ -16,7 +52,6 @@ export default function Home() {
         <main className="flex-1 overflow-y-auto p-8 relative">
           <BackButton />
           <div className="max-w-4xl mx-auto space-y-8">
-            {/* Hero Image Section */}
             <div className="relative h-64 md:h-96 rounded-lg overflow-hidden mb-8">
               <img
                 src="https://images.unsplash.com/photo-1511379938547-c1f69419868d"
@@ -33,8 +68,60 @@ export default function Home() {
             {session ? (
               <div className="grid gap-6">
                 <section className="space-y-4">
-                  <h2 className="text-2xl font-semibold">Que souhaitez-vous faire ?</h2>
-                  <div className="grid gap-4 md:grid-cols-2">
+                  <h2 className="text-2xl font-semibold">Découvrez nos fonctionnalités</h2>
+                  <NavigationMenu>
+                    <NavigationMenuList>
+                      <NavigationMenuItem>
+                        <NavigationMenuTrigger>Mon Répertoire</NavigationMenuTrigger>
+                        <NavigationMenuContent>
+                          <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
+                            <ListItem
+                              onClick={() => navigate("/repertoire")}
+                              title="Gérer mes pistes"
+                              className="cursor-pointer"
+                            >
+                              <Library className="w-4 h-4 mb-2" />
+                              Organisez et gérez votre bibliothèque musicale personnelle
+                            </ListItem>
+                            <ListItem
+                              onClick={() => navigate("/repertoire")}
+                              title="Ajouter une piste"
+                              className="cursor-pointer"
+                            >
+                              <Music className="w-4 h-4 mb-2" />
+                              Téléchargez de nouvelles pistes audio dans votre répertoire
+                            </ListItem>
+                          </ul>
+                        </NavigationMenuContent>
+                      </NavigationMenuItem>
+
+                      <NavigationMenuItem>
+                        <NavigationMenuTrigger>Explorer</NavigationMenuTrigger>
+                        <NavigationMenuContent>
+                          <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
+                            <ListItem
+                              onClick={() => navigate("/explorer")}
+                              title="Découvrir"
+                              className="cursor-pointer"
+                            >
+                              <Star className="w-4 h-4 mb-2" />
+                              Explorez les meilleures pistes de la communauté
+                            </ListItem>
+                            <ListItem
+                              onClick={() => navigate("/avis")}
+                              title="Avis & Commentaires"
+                              className="cursor-pointer"
+                            >
+                              <Users className="w-4 h-4 mb-2" />
+                              Partagez votre opinion et découvrez les retours des autres
+                            </ListItem>
+                          </ul>
+                        </NavigationMenuContent>
+                      </NavigationMenuItem>
+                    </NavigationMenuList>
+                  </NavigationMenu>
+
+                  <div className="grid gap-4 md:grid-cols-2 mt-8">
                     <Button 
                       className="h-16 text-sm px-3 py-1.5"
                       onClick={() => navigate('/repertoire')}
