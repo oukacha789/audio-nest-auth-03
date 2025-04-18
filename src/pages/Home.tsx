@@ -15,7 +15,7 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
-import { Library, Music, Star, Users } from "lucide-react";
+import { Headphones, Library, MessageCircle, Music, Settings, Star, Users } from "lucide-react";
 
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
@@ -72,50 +72,74 @@ export default function Home() {
                 <section className="space-y-4">
                   <h2 className="text-2xl font-semibold">Découvrez nos fonctionnalités</h2>
                   <NavigationMenu>
-                    <NavigationMenuList>
+                    <NavigationMenuList className="gap-2">
                       <NavigationMenuItem>
-                        <NavigationMenuTrigger>Mon Répertoire</NavigationMenuTrigger>
+                        <NavigationMenuTrigger>Mon Contenu Musical</NavigationMenuTrigger>
                         <NavigationMenuContent>
                           <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
                             <ListItem
                               onClick={() => navigate("/repertoire")}
-                              title="Gérer mes pistes"
+                              title="Gérer mon répertoire"
                               className="cursor-pointer"
                             >
                               <Library className="w-4 h-4 mb-2" />
-                              Organisez et gérez votre bibliothèque musicale personnelle
+                              Organisez et gérez votre collection musicale personnelle
                             </ListItem>
                             <ListItem
-                              onClick={() => navigate("/repertoire")}
+                              onClick={() => navigate("/repertoire/upload")}
                               title="Ajouter une piste"
                               className="cursor-pointer"
                             >
                               <Music className="w-4 h-4 mb-2" />
-                              Téléchargez de nouvelles pistes audio dans votre répertoire
+                              Ajoutez de nouvelles pistes audio à votre répertoire
                             </ListItem>
                           </ul>
                         </NavigationMenuContent>
                       </NavigationMenuItem>
 
                       <NavigationMenuItem>
-                        <NavigationMenuTrigger>Explorer</NavigationMenuTrigger>
+                        <NavigationMenuTrigger>Communauté</NavigationMenuTrigger>
                         <NavigationMenuContent>
                           <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
                             <ListItem
                               onClick={() => navigate("/explorer")}
-                              title="Découvrir"
+                              title="Explorer la musique"
                               className="cursor-pointer"
                             >
                               <Star className="w-4 h-4 mb-2" />
-                              Explorez les meilleures pistes de la communauté
+                              Découvrez les meilleures pistes de la communauté
                             </ListItem>
                             <ListItem
                               onClick={() => navigate("/avis")}
                               title="Avis & Commentaires"
                               className="cursor-pointer"
                             >
-                              <Users className="w-4 h-4 mb-2" />
+                              <MessageCircle className="w-4 h-4 mb-2" />
                               Partagez votre opinion et découvrez les retours des autres
+                            </ListItem>
+                          </ul>
+                        </NavigationMenuContent>
+                      </NavigationMenuItem>
+
+                      <NavigationMenuItem>
+                        <NavigationMenuTrigger>Préférences</NavigationMenuTrigger>
+                        <NavigationMenuContent>
+                          <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
+                            <ListItem
+                              onClick={() => navigate("/parametres/audio")}
+                              title="Paramètres Audio"
+                              className="cursor-pointer"
+                            >
+                              <Headphones className="w-4 h-4 mb-2" />
+                              Personnalisez vos paramètres de lecture audio
+                            </ListItem>
+                            <ListItem
+                              onClick={() => navigate("/parametres/profil")}
+                              title="Paramètres du profil"
+                              className="cursor-pointer"
+                            >
+                              <Settings className="w-4 h-4 mb-2" />
+                              Gérez vos informations personnelles et préférences
                             </ListItem>
                           </ul>
                         </NavigationMenuContent>
