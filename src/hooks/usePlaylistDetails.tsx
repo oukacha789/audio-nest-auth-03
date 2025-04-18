@@ -87,7 +87,7 @@ export function usePlaylistDetails(playlistId: string | undefined, navigate: Nav
 
         if (tracksError) throw tracksError;
 
-        // Formater les données des pistes correctement
+        // Formater les données des pistes correctement - Fixed the TypeScript errors here
         const tracks: Track[] = tracksData.map(item => ({
           id: item.audio_tracks.id,
           title: item.audio_tracks.title,
