@@ -15,6 +15,7 @@ import Reviews from "./pages/Reviews";
 import Explorer from "./pages/Explorer";
 import Register from "./pages/Register";
 import ApiDemo from "./pages/ApiDemo";
+import Contact from "./pages/Contact";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +37,7 @@ const App = () => (
                 <Route path="/avis" element={<Reviews />} />
                 <Route path="/parametres" element={<Settings />} />
                 <Route path="/api-demo" element={<ApiDemo />} />
+                <Route path="/contact" element={<Contact />} />
                 {/* Route par défaut - redirige vers la page d'accueil */}
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>

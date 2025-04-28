@@ -1,4 +1,5 @@
-import { Home, Library, Compass, MessageSquare, Settings, LogOut, UserPlus } from "lucide-react";
+
+import { Home, Library, Compass, MessageSquare, Settings, LogOut, UserPlus, Contact } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -33,6 +34,11 @@ const menuItems = [
     title: "Avis/Commentaires",
     icon: MessageSquare,
     path: "/avis",
+  },
+  {
+    title: "Contact",
+    icon: Contact,
+    path: "/contact",
   },
   {
     title: "S'inscrire",
