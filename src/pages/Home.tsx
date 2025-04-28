@@ -122,16 +122,16 @@ export default function Home() {
                       </NavigationMenuItem>
 
                       <NavigationMenuItem>
-                        <NavigationMenuTrigger>Préférences</NavigationMenuTrigger>
+                        <NavigationMenuTrigger>Outils & Services</NavigationMenuTrigger>
                         <NavigationMenuContent>
                           <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
                             <ListItem
-                              onClick={() => navigate("/parametres/audio")}
-                              title="Paramètres Audio"
+                              onClick={() => navigate("/api-demo")}
+                              title="Démo API"
                               className="cursor-pointer"
                             >
                               <Headphones className="w-4 h-4 mb-2" />
-                              Personnalisez vos paramètres de lecture audio
+                              Essayez notre intégration d'API pour générer du contenu
                             </ListItem>
                             <ListItem
                               onClick={() => navigate("/parametres/profil")}
@@ -168,9 +168,9 @@ export default function Home() {
                     </Button>
                     <Button 
                       className="h-16 text-sm px-3 py-1.5"
-                      onClick={() => navigate('/parametres')}
+                      onClick={() => navigate('/api-demo')}
                     >
-                      Gérer mes paramètres
+                      Essayer notre démo API
                     </Button>
                   </div>
                 </section>
